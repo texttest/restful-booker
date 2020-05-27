@@ -48,3 +48,21 @@ exports.createBooking = function(){
 
   return booking;
 }
+
+exports.loadBooking = function() {
+  var checkInDate = new Date(2015, 1, 1)
+  var latestDate = new Date()
+  latestDate.setDate(checkInDate.getDate() + 3)
+  var booking = {
+    firstname: "Joe",
+    lastname: "Bloggs",
+    totalprice: 102,
+    depositpaid: true,
+    bookingdates: {
+      checkin: dateFormat(checkInDate.setHours(15,0,0,0), "yyyy-mm-dd"),
+      checkout: dateFormat(latestDate.setHours(12,0,0,0), "yyyy-mm-dd")
+    }
+  }
+
+  return booking
+}

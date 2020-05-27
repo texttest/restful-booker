@@ -32,6 +32,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     console.log(err);
+    console.error(err.stack)
     res.sendStatus(err.status || 500);
   });
 }
@@ -39,6 +40,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
+  console.error(err.stack)
   res.sendStatus(err.status || 500);
 });
 

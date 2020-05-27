@@ -1,11 +1,10 @@
 {
-    "firstname": "Eric",
-    "lastname": "Smith",
-    "totalprice": 459,
-    "depositpaid": false,
+    "firstname": "Joe",
+    "lastname": "Bloggs",
+    "totalprice": 102,
+    "depositpaid": true,
     "bookingdates": {
-        "checkin": "2019-08-15",
-        "checkout": "2020-02-28"
-    },
-    "additionalneeds": "Breakfast"
+        "checkin": "2015-02-01",
+        "checkout": "2020-05-04"
+    }
 }

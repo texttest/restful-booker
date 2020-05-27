@@ -25,6 +25,16 @@ if(process.env.SEED === 'true'){
   })()
 };
 
+if(process.env.LOAD_DB === 'true'){
+  (function createBooking(){
+    var newBooking = creator.loadBooking()
+    Booking.create(newBooking, function(err, result){
+      if(err) return console.error(err);
+
+    });
+  })()
+}
+
 /**
  * @api {get} /ping HealthCheck
  * @apiName Ping
