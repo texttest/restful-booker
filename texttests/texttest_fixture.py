@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
-import os, sys
+import os, sys, time
 import requests, json
-
+from subprocess import Popen, PIPE
 
 def is_json(response):
     return "json" in response.headers["Content-Type"]
@@ -26,7 +26,7 @@ def write_key_value(the_dict, filename):
             f.write(f"{header}: {value}\n")
 
 
-if __name__ == "__main__":
+def do_request_response():
     if not os.path.exists("rest_command.txt"):
         sys.stderr.write("could not find rest command, exiting\n")
         sys.exit(1)
@@ -64,3 +64,33 @@ if __name__ == "__main__":
 
     write_key_value(r.headers, "response_headers.txt")
     write_key_value(r.cookies, "response_cookies.txt")
+
+def start_server():
+    print("starting server")
+    texttest_home = os.environ["TEXTTEST_HOME"]
+    cwd = os.getcwd()
+    os.environ["LOAD_DB"] = "true"
+    os.environ["DB_FILE"] = os.path.join(cwd, "db.json")
+    p = Popen([f"{texttest_home}/bin/www"],
+           shell=True,
+           cwd=os.getcwd(), stdout=PIPE)
+    count = 0
+    while count < 3:
+        msg = p.stdout.readline()
+        if b"db loaded" in msg:
+            time.sleep(0.05)
+            break
+        else:
+            print(msg)
+        count += 1
+    return p
+
+def stop_server(process):
+    print("stopping server")
+    process.terminate()
+    time.sleep(0.05)
+
+if __name__ == "__main__":
+    process = start_server()
+    do_request_response()
+    stop_server(process)

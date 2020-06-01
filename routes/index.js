@@ -23,16 +23,20 @@ if(process.env.SEED === 'true'){
       }
     });
   })()
-};
+}
 
 if(process.env.LOAD_DB === 'true'){
-  (function createBooking(){
-    var newBooking = creator.loadBooking()
-    Booking.create(newBooking, function(err, result){
+  var db = process.env.DB_FILE;
+  fs = require('fs');
+  var bookings = JSON.parse(fs.readFileSync(db, 'utf8'));
+
+  for (let i = 0; i < bookings.length; i++) {
+    Booking.create(bookings[i], function(err, result){
       if(err) return console.error(err);
 
     });
-  })()
+  }
+  console.info("db loaded");
 }
 
 /**

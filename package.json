@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env SEED=false LOAD_DB=true node ./bin/www",
+    "start": "cross-env SEED=true LOAD_DB=false node ./bin/www",
     "test": "mocha -R spec tests/spec.js",
     "build_docs": "apidoc -i ./routes/ -o public/apidoc/"
   },

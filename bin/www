@@ -6,6 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('restful-booker-v2:server');
+debug.enabled = true
 var http = require('http');
 
 /**

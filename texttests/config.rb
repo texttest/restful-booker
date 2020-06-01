@@ -12,6 +12,7 @@ link_test_path:rest_command.txt
 link_test_path:request_body.json
 link_test_path:request_headers.txt
 link_test_path:request_cookies.txt
+copy_test_path:db.json
 
 [collate_file]
 status_code:status_code.txt
@@ -28,3 +29,4 @@ response_json:python3 -m json.tool
 response_headers:Date
 response_headers:ETag
 response_json:"token": "[\d\w]+"{REPLACE "token": "atoken"}
+stderr:restful-booker-v2:server Listening on port
