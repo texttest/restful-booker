@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import os, sys, time
+import os, sys, time, io
 import requests, json
 from subprocess import Popen, PIPE
 
@@ -25,6 +25,14 @@ def write_key_value(the_dict, filename):
         for header, value in sorted(the_dict.items()):
             f.write(f"{header}: {value}\n")
 
+def do_post(full_url, headers, cookies):
+    if not os.path.exists("request_body.json"):
+        sys.stderr.write("could not find request body for post")
+        sys.exit(1)
+    with io.open("request_body.json", "r", encoding="utf-8") as f:
+        payload = json.loads(f.read())
+        r = requests.post(full_url, json=payload, headers=headers, cookies=cookies)
+        return r
 
 def do_request_response():
     if not os.path.exists("rest_command.txt"):
@@ -38,19 +46,15 @@ def do_request_response():
     BASE_URL = "http://localhost:3001"
     if len(sys.argv) > 1:
         BASE_URL = sys.argv[1]
+    full_url = f"{BASE_URL}{url}"
 
     headers = read_key_value_file("request_headers.txt")
     cookies = read_key_value_file("request_cookies.txt")
 
     if "GET" in rest.upper():
-        r = requests.get(f"{BASE_URL}{url}", headers=headers, cookies=cookies)
+        r = requests.get(full_url, headers=headers, cookies=cookies)
     if "POST" in rest.upper():
-        if not os.path.exists("request_body.json"):
-            sys.stderr.write("could not find request body for post")
-            sys.exit(1)
-        with open("request_body.json") as f:
-            payload = f.read()
-            r = requests.post(f"{BASE_URL}{url}", data=payload, headers=headers, cookies=cookies)
+        r = do_post(full_url, headers, cookies)
 
     with open("status_code.txt", "w") as f:
         f.write(str(r.status_code))
@@ -88,9 +92,10 @@ def start_server():
 def stop_server(process):
     print("stopping server")
     process.terminate()
-    time.sleep(0.05)
 
 if __name__ == "__main__":
     process = start_server()
-    do_request_response()
-    stop_server(process)
+    try:
+        do_request_response()
+    finally:
+        stop_server(process)

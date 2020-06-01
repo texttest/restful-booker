@@ -3,9 +3,9 @@
     "lastname": "Brown",
     "totalprice": 111,
     "depositpaid": true,
-    "bookingdates": {
-        "checkin": "2014-02-23",
-        "checkout": "2014-10-23"
+    "bookingdates" : {
+        "checkin" : "2021-01-01",
+        "checkout" : "2021-01-03"
     },
     "additionalneeds": "Breakfast"
 }
