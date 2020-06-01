@@ -1,5 +1,5 @@
 var Datastore = require('nedb');
-var db = new Datastore();
+
 var counter = 0;
 
 var booking = new Datastore();

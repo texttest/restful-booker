@@ -25,14 +25,25 @@ def write_key_value(the_dict, filename):
         for header, value in sorted(the_dict.items()):
             f.write(f"{header}: {value}\n")
 
-def do_post(full_url, headers, cookies):
+def get_payload():
     if not os.path.exists("request_body.json"):
-        sys.stderr.write("could not find request body for post")
+        sys.stderr.write("could not find request body")
         sys.exit(1)
     with io.open("request_body.json", "r", encoding="utf-8") as f:
         payload = json.loads(f.read())
-        r = requests.post(full_url, json=payload, headers=headers, cookies=cookies)
-        return r
+        return payload
+
+def do_post(full_url, headers, cookies):
+    payload = get_payload()
+    return requests.post(full_url, json=payload, headers=headers, cookies=cookies)
+
+def do_put(full_url, headers, cookies):
+    payload = get_payload()
+    return requests.put(full_url, json=payload, headers=headers, cookies=cookies)
+
+def do_patch(full_url, headers, cookies):
+    payload = get_payload()
+    return requests.patch(full_url, json=payload, headers=headers, cookies=cookies)
 
 def do_request_response():
     if not os.path.exists("rest_command.txt"):
@@ -44,8 +55,6 @@ def do_request_response():
         sys.stdout.write(f"found rest command {rest} for url {url}\n")
 
     BASE_URL = "http://localhost:3001"
-    if len(sys.argv) > 1:
-        BASE_URL = sys.argv[1]
     full_url = f"{BASE_URL}{url}"
 
     headers = read_key_value_file("request_headers.txt")
@@ -53,8 +62,12 @@ def do_request_response():
 
     if "GET" in rest.upper():
         r = requests.get(full_url, headers=headers, cookies=cookies)
-    if "POST" in rest.upper():
+    elif "POST" in rest.upper():
         r = do_post(full_url, headers, cookies)
+    elif "PUT" in rest.upper():
+        r = do_put(full_url, headers, cookies)
+    elif "PATCH" in rest.upper():
+        r = do_patch(full_url, headers, cookies)
 
     with open("status_code.txt", "w") as f:
         f.write(str(r.status_code))
@@ -68,6 +81,9 @@ def do_request_response():
 
     write_key_value(r.headers, "response_headers.txt")
     write_key_value(r.cookies, "response_cookies.txt")
+    if "--dumpdb" in sys.argv:
+        r = requests.get(BASE_URL + "/dumpdb", headers={"Authorization":"Basic YWRtaW46cGFzc3dvcmQxMjM="})
+        print(f"requested to dump db, got response {r.status_code}")
 
 def start_server():
     print("starting server")

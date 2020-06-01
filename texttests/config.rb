@@ -14,16 +14,20 @@ link_test_path:request_headers.txt
 link_test_path:request_cookies.txt
 copy_test_path:db.json
 
+#create_catalogues:true
+
 [collate_file]
 status_code:status_code.txt
 response_json:response.json
 response_text:response.txt
 response_cookies:response_cookies.txt
 response_headers:response_headers.txt
+final_db:db.json
 
 
 [collate_script]
 response_json:python3 -m json.tool
+final_db:python3 -m json.tool
 
 [run_dependent_text]
 response_headers:Date

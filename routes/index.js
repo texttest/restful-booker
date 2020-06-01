@@ -33,9 +33,9 @@ if (process.env.LOAD_DB === 'true') {
     for (let i = 0; i < bookings.length; i++) {
         Booking.create(bookings[i], function (err, result) {
             if (err) return console.error(err);
-
         });
     }
+    //fs.unlinkSync(db, function(){});
     console.info("db loaded");
 }
 
@@ -682,6 +682,24 @@ router.post('/auth', function (req, res, next) {
         res.send({'token': token});
     } else {
         res.send({'reason': 'Bad credentials'});
+    }
+});
+
+router.get('/dumpdb', function(req, res, next){
+    if (req.headers.authorization == 'Basic YWRtaW46cGFzc3dvcmQxMjM=') {
+        var db = process.env.DB_FILE;
+        fs = require('fs');
+        var query = {};
+        Booking.getIDs(query, function(err, record){
+            if (record) {
+                fs.writeFileSync(db, JSON.stringify(record));
+                console.info("db written to file " + db);
+                res.sendStatus(201);
+            }
+            res.sendStatus(500);
+        });
+    } else {
+        res.sendStatus(403);
     }
 });
 
