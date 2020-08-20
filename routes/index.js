@@ -692,6 +692,16 @@ router.get('/dumpdb', function(req, res, next){
         var query = {};
         Booking.getIDs(query, function(err, record){
             if (record) {
+                function compare( a, b ) {
+                  if ( a.bookingid < b.bookingid ){
+                    return -1;
+                  }
+                  if ( a.bookingid > b.bookingid ){
+                    return 1;
+                  }
+                  return 0;
+                }
+                record.sort(compare)
                 fs.writeFileSync(db, JSON.stringify(record));
                 console.info("db written to file " + db);
                 res.sendStatus(201);
