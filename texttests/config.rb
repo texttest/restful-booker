@@ -8,6 +8,8 @@ filename_convention_scheme:standard
 # Expanded name to use for application
 full_name:Restful Booker
 
+config_module:default
+
 link_test_path:rest_command.txt
 link_test_path:request_body.json
 link_test_path:request_headers.txt
