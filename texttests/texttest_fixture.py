@@ -45,6 +45,9 @@ def do_patch(full_url, headers, cookies):
     payload = get_payload()
     return requests.patch(full_url, json=payload, headers=headers, cookies=cookies)
 
+def do_delete(full_url, headers, cookies):
+    return requests.delete(full_url,headers=headers, cookies=cookies)
+
 def do_request_response():
     if not os.path.exists("rest_command.txt"):
         sys.stderr.write("could not find rest command, exiting\n")
@@ -68,6 +71,8 @@ def do_request_response():
         r = do_put(full_url, headers, cookies)
     elif "PATCH" in rest.upper():
         r = do_patch(full_url, headers, cookies)
+    elif "DELETE" in rest.upper():
+        r = do_delete(full_url, headers, cookies)
 
     with open("status_code.txt", "w") as f:
         f.write(str(r.status_code))

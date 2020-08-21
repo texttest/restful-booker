@@ -34,3 +34,4 @@ response_headers:Date
 response_headers:ETag
 response_json:"token": "[\d\w]+"{REPLACE "token": "atoken"}
 stderr:restful-booker-v2:server Listening on port
+final_db:"_id": "[\d\w]+"{REPLACE "_id": "id"}
