@@ -32,5 +32,5 @@ final_db:python3 -m json.tool
 [run_dependent_text]
 response_headers:Date
 response_headers:ETag
-response_json:"token": "[\d\w]+"{REPLACE "token": "atoken"}
+#response_json:"token": "[\d\w]+"{REPLACE "token": "atoken"}
 stderr:restful-booker-v2:server Listening on port
