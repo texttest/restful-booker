@@ -1,6 +1,7 @@
 {
 	"lastname":"Jones",
 	"bookingdates": {
+		"checkin":"2018-05-29",
 	    "checkout":"2019-01-09"
     }
 }
