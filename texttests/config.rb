@@ -14,8 +14,6 @@ link_test_path:request_headers.txt
 link_test_path:request_cookies.txt
 copy_test_path:db.json
 
-#create_catalogues:true
-
 [collate_file]
 status_code:status_code.txt
 response_json:response.json
