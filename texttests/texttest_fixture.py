@@ -95,7 +95,7 @@ def find_unique_port(minimum_port=3001):
         - greater than or equal to the minimum_port given
         - unique for the currently executing test case (to avoid test collisions)
     """
-    unique_string = os.environ["TEXTTEST_SANDBOX"]
+    unique_string = os.environ.get("TEXTTEST_SANDBOX")
     if unique_string is None:
         return str(minimum_port)
     port = abs(hash(unique_string)) % (65536 - minimum_port)
@@ -104,8 +104,8 @@ def find_unique_port(minimum_port=3001):
 
 def start_server(port):
     print("starting server")
-    texttest_home = os.environ["TEXTTEST_HOME"]
     cwd = os.getcwd()
+    texttest_home = os.environ.get("TEXTTEST_HOME", cwd)
     my_env = os.environ.copy()
     my_env["LOAD_DB"] = "true"
     my_env["DB_FILE"] = os.path.join(cwd, "db.json")
