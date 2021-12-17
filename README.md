@@ -7,7 +7,7 @@ A simple Node booking form for testing RESTful web services.
 3. Navigate into the restful-booker root folder
 4. Run ```npm install```
 5. Run ```npm start```
- 
+
 ## API
 API details can be found on the [publically deployed version of Restful-Booker](https://restful-booker.herokuapp.com/).
 
