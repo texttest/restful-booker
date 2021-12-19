@@ -9,12 +9,12 @@ A simple Node booking form for testing RESTful web services.
 5. Run ```npm start```
 
 ## API
-API details can be found on the [publically deployed version of Restful-Booker](https://restful-booker.herokuapp.com/).
+API details can be found on the [api docs](https://localhost:3001/) (when you have it running locally).
 
 ## TextTests
 
-This branch has some tests written using TextTest. Start the texttest GUI:
+This branch has some tests written using [TextTest](http://texttest.org). Start the texttest GUI:
 
     texttest
     
-Select and run tests. Note that you should not run the application with 'npm start' at the same time as running the tests. That will cause a port conflict.
+Select and run tests. 
