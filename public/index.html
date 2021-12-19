@@ -34,12 +34,14 @@
         <div class="row">
           <div class="col-12 text-center">
             <h1>Welcome to Restful-Booker</h1>
-            <p>An API playground created by <a href="http://mwtestconsultancy.co.uk/">Mark Winteringham</a> for those wanting to learn more about API testing and tools</p>
+            <p>An API playground created by <a href="http://mwtestconsultancy.co.uk/">Mark Winteringham</a> for those wanting to learn more about API testing and tools.</p>
+            <p> This version of it has been modified by 
+              <a href="https://github.com/emilybache">Emily Bache</a> to enable an approval testing approach using <a href="http://texttest.org">TextTest</a>.</p>
           </div>
         </div>
         <div class="row">
           <div class="col-12 text-center">
-            <p><a href="https://twitter.com/2bittester" alt="Twitter">@2bittester</a> | <a href="http://mwtestconsultancy.co.uk/" alt="MWTestConsultancy Website">Website</a> | <a href="https://github.com/mwinteringham/restful-booker" alt="API Code">Code</a> | <a href="/apidoc/index.html" alt="API documentation">API Docs</a></p>
+            <p><a href="https://twitter.com/emilybache" alt="Twitter">@emilybache</a> | <a href="https://github.com/emilybache/restful-booker" alt="API Code">Code</a> | <a href="/apidoc/index.html" alt="API documentation">API Docs</a></p>
           </div>
         </div>
       </div>
@@ -47,7 +49,9 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-        	<p>Welcome to Restful-booker an API that you can use to learn more about API Testing or try out API testing tools against. Restful-booker is a <span style="color: red; font-weight: bold">C</span>reate <span style="color: red; font-weight: bold">R</span>ead <span style="color: red; font-weight: bold">U</span>pdate <span style="color: red; font-weight: bold">D</span>elete Web API that comes with authentication features and loaded with a bunch of bugs for you to explore. The API comes pre-loaded with 10 records for you to work with <span style="font-weight: bold">and resets itself every 10 minutes back to that default state.</span> Restful-booker also comes with <a href="/apidoc/index.html" alt="API documentation">detailed API documentation</a> to help get you started with your API testing straight away.</p>
+        	<p>Welcome to Restful-booker an API that you can use to learn more about API Testing or try out API testing tools against. Restful-booker is a <span style="color: red; font-weight: bold">C</span>reate <span style="color: red; font-weight: bold">R</span>ead <span style="color: red; font-weight: bold">U</span>pdate <span style="color: red; font-weight: bold">D</span>elete Web API that comes with authentication features and loaded with a bunch of bugs for you to explore. </p>
+          <p>If you start the application with the environment variable SEED=true the API comes pre-loaded with 10 random records for you to work with. Additionally, Emily has added the ability to seed the database with fixed data loaded from a json file specified in the environment variable 'DB_FILE'.</p>
+          <p>Emily has also added an endpoint 'Dump DB' which allows you to write the current contents of the database to a local file for testing purposes. For more information about all the REST endpoints, see the <a href="/apidoc/index.html" alt="API documentation">detailed API documentation</a>.</p>
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ if(process.env.SEED === 'true'){
   })()
 };
 
-// this piece of code enables the test cases to populate the db with known data
+// this piece of code enables the test cases to populate the db with known data.
 if (process.env.LOAD_DB === 'true') {
   var db = process.env.DB_FILE;
   fs = require('fs');
