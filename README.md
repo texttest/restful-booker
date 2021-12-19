@@ -12,7 +12,7 @@ A simple Node booking form for testing RESTful web services.
 API details can be found on the [api docs](https://localhost:3001/) (when you have it running locally).
 
 ## Tests
-There is a skeleton test provided with texttest. Run it with:
+There is a skeleton test provided with [TextTest](http://texttest.org). Run it with:
 
     texttest
   
