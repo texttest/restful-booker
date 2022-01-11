@@ -1,5 +1,5 @@
 # Full path to the System Under Test (or Java Main Class name)
-executable:${TEXTTEST_HOME}/texttests/texttest_fixture.py
+executable:${TEXTTEST_HOME}/integration_tests/test_rig.py
 interpreter:python3
 
 # Naming scheme to use for files for stdin,stdout and stderr
