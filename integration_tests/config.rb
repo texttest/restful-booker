@@ -1,6 +1,5 @@
 # Full path to the System Under Test (or Java Main Class name)
 executable:${TEXTTEST_HOME}/integration_tests/test_rig.py
-interpreter:python3
 
 # Naming scheme to use for files for stdin,stdout and stderr
 filename_convention_scheme:standard
@@ -26,8 +25,8 @@ final_db:db.json
 
 
 [collate_script]
-response_json:python3 -m json.tool
-final_db:python3 -m json.tool
+response_json:python -m json.tool
+final_db:python -m json.tool
 
 [run_dependent_text]
 response_headers:Date

@@ -1,8 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import os, sys, time, io
 import requests, json
 from subprocess import Popen, PIPE
+
 
 def is_json(response):
     return "json" in response.headers["Content-Type"]
@@ -25,6 +26,7 @@ def write_key_value(the_dict, filename):
         for header, value in sorted(the_dict.items()):
             f.write(f"{header}: {value}\n")
 
+
 def get_payload():
     if not os.path.exists("request_body.json"):
         sys.stderr.write("could not find request body")
@@ -33,20 +35,25 @@ def get_payload():
         payload = json.loads(f.read())
         return payload
 
+
 def do_post(full_url, headers, cookies):
     payload = get_payload()
     return requests.post(full_url, json=payload, headers=headers, cookies=cookies)
+
 
 def do_put(full_url, headers, cookies):
     payload = get_payload()
     return requests.put(full_url, json=payload, headers=headers, cookies=cookies)
 
+
 def do_patch(full_url, headers, cookies):
     payload = get_payload()
     return requests.patch(full_url, json=payload, headers=headers, cookies=cookies)
 
+
 def do_delete(full_url, headers, cookies):
-    return requests.delete(full_url,headers=headers, cookies=cookies)
+    return requests.delete(full_url, headers=headers, cookies=cookies)
+
 
 def do_request_response(port=3001):
     if not os.path.exists("rest_command.txt"):
@@ -87,8 +94,24 @@ def do_request_response(port=3001):
     write_key_value(r.headers, "response_headers.txt")
     write_key_value(r.cookies, "response_cookies.txt")
     if "--dumpdb" in sys.argv:
-        r = requests.get(BASE_URL + "/dumpdb", headers={"Authorization":"Basic YWRtaW46cGFzc3dvcmQxMjM="})
+        r = requests.get(BASE_URL + "/dumpdb", headers={"Authorization": "Basic YWRtaW46cGFzc3dvcmQxMjM="})
         print(f"requested to dump db, got response {r.status_code}")
+
+
+def findports(portcount):
+    result = []
+    socks = []
+    for i in range(portcount):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind(("", 0))
+        s.listen(1)
+        socks.append(s)
+        result.append(s.getsockname()[1])
+
+    for sock in socks:
+        sock.close()
+
+    return result
 
 
 def find_unique_port(minimum_port=3001):
@@ -103,6 +126,7 @@ def find_unique_port(minimum_port=3001):
     port += minimum_port
     return f"{port}"
 
+
 def start_server(port):
     print("starting server")
     cwd = os.getcwd()
@@ -112,11 +136,11 @@ def start_server(port):
     my_env["DB_FILE"] = os.path.join(cwd, "db.json")
     my_env["PORT"] = port
 
-    p = Popen([f"{texttest_home}/bin/www"],
-           shell=True,
-           cwd=cwd,
-           stdout=PIPE,
-           env=my_env)
+    p = Popen(["node", f"{texttest_home}/bin/www"],
+              shell=True,
+              cwd=cwd,
+              stdout=PIPE,
+              env=my_env)
     count = 0
     while count < 3:
         msg = p.stdout.readline()
@@ -124,13 +148,15 @@ def start_server(port):
             time.sleep(0.05)
             break
         else:
-            print(msg)
+            print(f"server: {msg}")
         count += 1
     return p
+
 
 def stop_server(process):
     print("stopping server")
     process.terminate()
+
 
 if __name__ == "__main__":
     port = find_unique_port()
