@@ -1,3 +1,4 @@
+starting Restful Booker on url http://localhost:9919
 starting server
-found rest command get for url /ping
+found http method GET for url /ping
 stopping server

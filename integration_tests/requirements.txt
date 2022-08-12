@@ -1,1 +1,2 @@
 requests
+http_text_cli

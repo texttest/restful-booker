@@ -1,3 +1,4 @@
+starting Restful Booker on url http://localhost:55361
 starting server
-found rest command post for url /auth
+found http method POST for url /auth
 stopping server
