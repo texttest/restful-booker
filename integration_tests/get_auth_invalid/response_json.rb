@@ -1,3 +1,0 @@
-{
-    "reason": "Bad credentials"
-}

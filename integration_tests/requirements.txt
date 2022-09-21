@@ -1,4 +1,3 @@
-requests
-http_text_cli
+capturemock
 dbtext
 pymongo
