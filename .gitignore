@@ -1,7 +1,10 @@
 **/node_modules
 **/.DS_Store
 .vscode/
+venv/
 npm-debug.log
 .idea
+.project
+.pydevproject
 *.iml
 *.pyc

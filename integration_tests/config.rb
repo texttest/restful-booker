@@ -1,5 +1,5 @@
 # Full path to the System Under Test (or Java Main Class name)
-executable:${TEXTTEST_HOME}/integration_tests/test_rig.py
+executable:${TEXTTEST_ROOT}/test_rig.py
 
 # Naming scheme to use for files for stdin,stdout and stderr
 filename_convention_scheme:standard
@@ -11,7 +11,7 @@ link_test_path:request_url.txt
 link_test_path:request_body.json
 link_test_path:request_headers.txt
 link_test_path:request_cookies.txt
-copy_test_path:db.json
+copy_test_path:mongodata
 
 #create_catalogues:true
 
@@ -21,12 +21,9 @@ response_json:response_body.json
 response_text:response_body.txt
 response_cookies:response_cookies.txt
 response_headers:response_headers.txt
-final_db:db.json
-
 
 [collate_script]
 response_json:python -m json.tool
-final_db:python -m json.tool
 
 [run_dependent_text]
 stdout:(url http://localhost:)\d+{REPLACE \1<port>}

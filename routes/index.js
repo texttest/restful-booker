@@ -27,20 +27,6 @@ if(process.env.SEED === 'true'){
   })()
 };
 
-// this piece of code enables the test cases to populate the db with known data
-if (process.env.LOAD_DB === 'true') {
-  var db = process.env.DB_FILE;
-  fs = require('fs');
-  var bookings = JSON.parse(fs.readFileSync(db, 'utf8'));
-
-  for (let i = 0; i < bookings.length; i++) {
-    Booking.create(bookings[i], function (err, result) {
-      if (err) return console.error(err);
-    });
-  }
-  console.info("db loaded");
-}
-
 ua('UA-118712228-2', uuidv4());
 
 /**
@@ -693,51 +679,6 @@ router.post('/auth', function(req, res, next){
   } else {
     res.send({'reason': 'Bad credentials'});
   }
-});
-
-/**
- * @api {get} dumpdb DumpDB
- * @apiName DumpDB
- * @apiGroup Admin
- * @apiVersion 1.0.0
- * @apiDescription Writes the contents of the database to a local file specified in the environment
- * variable "DB_FILE" or if that is not set, a file named 'db_dump.json'
- *
- * @apiExample Example 1:
- * curl -i http://localhost:3001/dumpdb \
- -H 'Content-Type: application/json' \
- -H 'Authorization: Basic YWRtaW46cGFzc3dvcmQxMjM='
- *
- * @apiSuccessExample Response:
- * HTTP/1.1 200 OK
- */
-router.get('/dumpdb', function(req, res, next){
-    if (req.headers.authorization == 'Basic YWRtaW46cGFzc3dvcmQxMjM=') {
-        var db = process.env.DB_FILE || "db_dump.json";
-        fs = require('fs');
-        var query = {};
-        Booking.getIDs(query, function(err, record){
-            if (record) {
-                function compare( a, b ) {
-                  if ( a.bookingid < b.bookingid ){
-                    return -1;
-                  }
-                  if ( a.bookingid > b.bookingid ){
-                    return 1;
-                  }
-                  return 0;
-                }
-                record.sort(compare)
-                fs.writeFileSync(db, JSON.stringify(record));
-                console.info("db written to file " + db);
-                res.sendStatus(201);
-            } else {
-              res.sendStatus(500);
-            }
-        });
-    } else {
-        res.sendStatus(403);
-    }
 });
 
 module.exports = router;

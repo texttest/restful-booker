@@ -1,5 +1,4 @@
-starting Restful Booker on url http://localhost:39802
+starting Restful Booker on url http://localhost:6324
 starting server
 found http method POST for url /booking
-requested to dump db, got response 201
 stopping server

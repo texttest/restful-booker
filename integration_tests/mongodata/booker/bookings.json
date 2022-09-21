@@ -1,5 +1,7 @@
 [
   {
+    "_id": "632ad02015eaac8fd0f0542d",
+    "bookingid": 1,
     "firstname": "Mary",
     "lastname": "Brown",
     "totalprice": 953,
@@ -10,6 +12,8 @@
     }
   },
   {
+    "_id": "632ad219e8cc280ec736abf2",
+    "bookingid": 2,
     "firstname": "Susan",
     "lastname": "Bailey",
     "totalprice": 355,
@@ -21,6 +25,7 @@
     "additionalneeds": "Breakfast"
   },
   {
+    "bookingid": 3,
     "firstname": "Sally",
     "lastname": "Jones",
     "totalprice": 681,
