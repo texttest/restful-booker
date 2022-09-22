@@ -1,6 +1,9 @@
 # Full path to the System Under Test (or Java Main Class name)
 executable:${TEXTTEST_ROOT}/test_rig.py
 
+home_operating_system:nt
+interpreter:${TEXTTEST_ROOT}/venv/Scripts/python.exe
+
 # Naming scheme to use for files for stdin,stdout and stderr
 filename_convention_scheme:standard
 
