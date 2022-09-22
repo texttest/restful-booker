@@ -3,6 +3,7 @@
 .vscode/
 venv/
 npm-debug.log
+package-lock.json
 .idea
 .project
 .pydevproject
