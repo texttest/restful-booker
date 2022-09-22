@@ -8,7 +8,7 @@ filename_convention_scheme:standard
 full_name:Restful Booker
 
 copy_test_path:mongodata
-copy_test_path:capturemockrc
+copy_test_path:capturemock.rc
 
 # Configuration for integration with "CaptureMock"
 [definition_file_stems]
@@ -16,6 +16,5 @@ regenerate:httpmocks
 
 [run_dependent_text]
 stdout:(url http://localhost:)\d+{REPLACE \1<port>}
-httpmocks:ETag
 httpmocks:"token":"[\d\w]+"{REPLACE "token": "atoken"}
 stderr:restful-booker-v2:server Listening on port

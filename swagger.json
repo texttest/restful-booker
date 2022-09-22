@@ -1,0 +1,363 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "An API for practising your testing skills against",
+        "version": "1.0.0",
+        "title": "Restful booker",
+        "contact": {
+            "email": "abc@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "schemes": ["http"],
+    "basePath": "/",
+    "paths" : {
+        "/ping" : {
+            "get" : {
+                "summary" : "ping HealthCheck",
+                "description": "A simple health check endpoint to confirm whether the API is up and running.",
+                "produces": ["application/json"],
+                "parameters": [],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/auth" : {
+            "post" : {
+                "summary" : "Get an authorization token",
+                "description": "Get an authorization token",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "username and password",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/AuthParams"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/AuthResponse"
+                        }
+                    }
+                }
+            }
+        }, 
+        "/booking" : {
+            "get" : {
+                "summary" : "Get booking IDs",
+                "description": "Returns the ids of all the bookings that exist within the API. Can take optional query strings to search and return a subset of booking ids.",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "firstname",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lastname",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "checkin",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    },
+                    {
+                        "name": "checkout",
+                        "in": "query",
+                        "schema": {
+                            "type": "string",
+                            "format": "date-time"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/GetIdsResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post" : {
+                "summary" : "Create booking",
+                "description": "Creates a new booking in the API",
+                "produces": ["application/json"],
+                "consumes": ["application/json"],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "booking object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Booking"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/BookingResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/booking/{id}" : {
+            "get" : {
+                "summary" : "Get booking",
+                "description": "Returns a specific booking based upon the booking id provided",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "booking id to find",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Booking"
+                        }
+                    }
+                }
+            },
+            "put" : {
+                "summary" : "Update a booking",
+                "description": "Update a booking",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "booking id to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "The authorization header",
+                        "schema": {
+                          "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "booking object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "task" : {
+                                    "type": "object",
+                                    "$ref": "#/definitions/Booking"
+                                } 
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Booking"
+                        }
+                    }
+                }
+            },
+            "patch" : {
+                "summary" : "Partially update a booking",
+                "description": "Partially update a booking",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "booking id to update",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "The authorization header",
+                        "schema": {
+                          "type": "string"
+                        }
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "booking object",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "task" : {
+                                    "type": "object",
+                                    "$ref": "#/definitions/Booking"
+                                } 
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/Booking"
+                        }
+                    }
+                }
+            },
+            "delete" : {
+                "summary" : "Delete a booking",
+                "description": "Delete a booking",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Booking id that needs to be deleted",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "Authorization",
+                        "in": "header",
+                        "description": "The authorization header",
+                        "schema": {
+                          "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        }
+    }, 
+    "definitions": {
+        "GetIdsResponse": {
+            "type": "object",
+            "properties": {
+                "bookingid": {
+                     "type": "integer"
+                }
+            }
+        },
+        "Booking": {
+            "type": "object",
+            "properties": {
+                "firstname": {
+                    "type": "string"
+                },
+                "lastname": {
+                    "type": "string"
+                },
+                "totalprice": {
+                    "type": "integer"
+                },
+                "depositpaid": {
+                    "type": "boolean"
+                },
+                "bookingdates": {
+                    "type": "object",
+                    "properties": {
+                      "checkin": {
+                        "type": "string"
+                      },
+                      "checkout": {
+                        "type": "string"
+                      }
+                    }
+                },
+                "additionalneeds": {
+                  "type": "string"
+                }
+            }
+        },
+        "BookingResponse": {
+            "type": "object",
+            "properties": {
+                "bookingid": {
+                    "type": "string"
+                },
+                "booking": {
+                    "type": "object",
+                    "$ref": "#/definitions/Booking"
+                }
+            }
+        },
+        "AuthParams": {
+            "type": "object",
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "AuthResponse": {
+            "type": "object",
+            "properties": {
+                "token": {
+                    "type": "string"
+                },
+                "reason": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

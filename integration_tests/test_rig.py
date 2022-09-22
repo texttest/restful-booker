@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-import logging, os, sys, socket, time
-from subprocess import Popen, PIPE
+import logging, os, sys, socket, webbrowser, time
+from subprocess import Popen
 import capturemock
 import dbtext
 
@@ -10,6 +10,15 @@ def find_available_port():
         s.bind(("", 0))
         s.listen(1)
         return s.getsockname()[1]
+    
+def wait_for_file(fn):
+    for _ in range(600):
+        if os.path.isfile(fn) and os.path.getsize(fn) > 0:
+            time.sleep(1) # allow time for flush
+            return
+        else:
+            time.sleep(0.1)
+    print("Timed out waiting for action after 1 minute!", file=sys.stderr)
 
 if __name__ == "__main__":
     logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
@@ -28,16 +37,28 @@ if __name__ == "__main__":
         my_env["BOOKER_DB_URL"] = testConnStr
         my_env["PORT"] = str(port)
         
+        replayFile, recordFile = capturemock.get_default_setup_for_texttest()
+        record = replayFile is None
+        if record:
+            recordFile = "httpmocks.rb"
+            capturemock.setUpServer(capturemock.RECORD, recordFile, rcFiles=["capturemock.rc"], 
+                                    environment=my_env, recordFromUrl=url)
+        
         texttest_home = os.path.dirname(os.environ.get("TEXTTEST_ROOT"))
         command=["node", f"{texttest_home}/bin/www"]
     
         logging.info(f"starting Restful Booker on url {url}")
     
-        process = Popen(command, stdout=PIPE, env=my_env)
+        process = Popen(command, stdout=open("restful-booker.txt", "w"), env=my_env)
         try:
-            capturemock.replay_for_server(serverAddress=url)
+            if record:
+                webbrowser.open_new(url + "/api-docs")
+                wait_for_file(recordFile)
+            else:
+                capturemock.replay_for_server("capturemock.rc", replayFile, recordFile, url)
         finally:
             logging.info("stopping Restful Booker")
             process.terminate()
+            capturemock.terminate()
         
         db.dump_changes("rb")
