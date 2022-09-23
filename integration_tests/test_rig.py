@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import logging, os, sys, socket, webbrowser, time
-from subprocess import Popen
+from subprocess import Popen, PIPE
 import capturemock
 import dbtext
 
@@ -19,6 +19,13 @@ def wait_for_file(fn):
         else:
             time.sleep(0.1)
     print("Timed out waiting for action after 1 minute!", file=sys.stderr)
+
+def wait_for_message(proc, ready_text):
+    ready_bytes = ready_text.encode()
+    for _ in range(3):
+        msg_bytes = proc.stdout.readline()
+        if ready_bytes in msg_bytes:
+            break
 
 if __name__ == "__main__":
     logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
@@ -49,7 +56,8 @@ if __name__ == "__main__":
     
         logging.info(f"starting Restful Booker on url {url}")
     
-        process = Popen(command, stdout=open("restful-booker.txt", "w"), env=my_env)
+        process = Popen(command, stdout=PIPE, env=my_env)
+        wait_for_message(process, "Listening")
         try:
             if record:
                 webbrowser.open_new(url + "/api-docs")
