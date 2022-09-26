@@ -11,11 +11,7 @@ filename_convention_scheme:standard
 full_name:Restful Booker
 
 copy_test_path:mongodata
-copy_test_path:capturemock.rc
-
-# Configuration for integration with "CaptureMock"
-[definition_file_stems]
-regenerate:httpmocks
+import_config_file:capturemock_config
 
 [run_dependent_text]
 stdout:(url http://localhost:)\d+{REPLACE \1<port>}

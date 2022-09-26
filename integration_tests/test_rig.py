@@ -44,12 +44,10 @@ if __name__ == "__main__":
         my_env["BOOKER_DB_URL"] = testConnStr
         my_env["PORT"] = str(port)
         
-        replayFile, recordFile = capturemock.get_default_setup_for_texttest()
-        record = replayFile is None
+        record = capturemock.texttest_is_recording()
         if record:
-            recordFile = "httpmocks.rb"
-            capturemock.setUpServer(capturemock.RECORD, recordFile, rcFiles=["capturemock.rc"], 
-                                    environment=my_env, recordFromUrl=url)
+            capturemock_env = capturemock.start_server_from_texttest(url)
+            my_env.update(capturemock_env)
         
         texttest_home = os.path.dirname(os.environ.get("TEXTTEST_ROOT"))
         command=["node", f"{texttest_home}/bin/www"]
@@ -61,9 +59,9 @@ if __name__ == "__main__":
         try:
             if record:
                 webbrowser.open_new(url + "/api-docs")
-                wait_for_file(recordFile)
+                wait_for_file(os.getenv("TEXTTEST_CAPTUREMOCK_RECORD"))
             else:
-                capturemock.replay_for_server("capturemock.rc", replayFile, recordFile, url)
+                capturemock.replay_for_server(serverAddress=url)
         finally:
             logging.info("stopping Restful Booker")
             process.terminate()
