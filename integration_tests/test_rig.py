@@ -67,4 +67,6 @@ if __name__ == "__main__":
             process.terminate()
             capturemock.terminate()
         
+        if "TEXTTEST_DB_SETUP" in os.environ:
+            db.dump_data_directory()
         db.dump_changes("rb")

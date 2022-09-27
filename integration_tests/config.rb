@@ -10,7 +10,8 @@ filename_convention_scheme:standard
 # Expanded name to use for application
 full_name:Restful Booker
 
-copy_test_path:mongodata
+dbtext_database_path:mongodata
+
 import_config_file:capturemock_config
 
 [run_dependent_text]
