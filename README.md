@@ -11,6 +11,9 @@ A simple Node booking form for testing RESTful web services.
 ## API
 API details can be found on the [api docs](https://localhost:3001/) (when you have it running locally).
 
+## Swagger documentation
+Alternative API documentation with Swagger can be found on [Swagger](https://localhost:3001/api-docs). Swagger also allows you to actually make the calls directly in the interface.
+
 ## TextTests
 
 This branch has some tests written using [TextTest](http://texttest.org). Start the texttest GUI:
@@ -18,3 +21,7 @@ This branch has some tests written using [TextTest](http://texttest.org). Start 
     texttest
     
 Select and run tests. 
+
+You can record new tests also by selecting the "Record" option on the Running tab. Swagger then comes up, you can press "try it out" and make the call you want to make. 
+
+To record the state of the database at the end of the test, check the "database setup run" button. This will create a "mongodata" folder in the test, you can then replace the actions in the test with actions that use that data.
