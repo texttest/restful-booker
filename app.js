@@ -7,11 +7,13 @@ var xmlparser = require('express-xml-bodyparser');
 
 var routes = require('./routes/index');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
 var app = express();
+
 var capturemock = process.env.CAPTUREMOCK_SERVER;
 if (capturemock) {
-  const swaggerUi = require('swagger-ui-express');
-  const swaggerDocument = require('./swagger.json');
   const requestInterceptorStr = "(req) => { req.url = req.url.replace(/http:..localhost:[0-9]+/, '" + capturemock + "'); return req; }";
   var options = {
     swaggerOptions: {
@@ -19,6 +21,8 @@ if (capturemock) {
     }
   }
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+} else {
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {}));
 }
 
 app.use(logger('dev'));
