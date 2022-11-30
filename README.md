@@ -39,5 +39,8 @@ Install the additional python packages:
 This is needed so TextTest will be able to run the script integration_tests/test_rig.py. Start TextTest in this folder and you should open the static test browser. Select one or more tests from the left side, and run them.
 
 
+## Swagger documentation
+Alternative API documentation with Swagger can be found on [Swagger](https://localhost:3001/api-docs). Swagger also allows you to actually make the calls directly in the interface.
+
 ## API
 API details can be found on the [api docs](https://localhost:3001/) (when you have it running locally).
