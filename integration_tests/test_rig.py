@@ -36,9 +36,9 @@ if __name__ == "__main__":
         if not db.setup_succeeded(): # could not start MongoDB, for example
             sys.exit(1)
 
-        testConnStr = "mongodb://localhost:" + str(db.port)
+        testConnStr = "mongodb://127.0.0.1:" + str(db.port)
         port = find_available_port()
-        url = f"http://localhost:{port}"
+        url = f"http://127.0.0.1:{port}"
         
         my_env = os.environ.copy()
         my_env["BOOKER_DB_URL"] = testConnStr
