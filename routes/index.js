@@ -112,12 +112,17 @@ router.get('/booking', function(req, res, next) {
   }
 
   Booking.getIDs(query, function(err, record){
-    var booking = parse.bookingids(req, record);
-
-    if(!booking){
-      res.sendStatus(418);
+    if (err) {
+      console.error(err);
+      res.sendStatus(500);
     } else {
-      res.send(booking);
+      var booking = parse.bookingids(req, record);
+
+      if(!booking){
+        res.sendStatus(418);
+      } else {
+        res.send(booking);
+      }
     }
   })
 });
