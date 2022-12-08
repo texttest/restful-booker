@@ -1,43 +1,46 @@
 # restful-booker
 A simple booking API for testing RESTful web services. The original version was designed by 
 [Mark Winteringham](https://restful-booker.herokuapp.com/). This version has been modified
-by Emily Bache to enable an approval testing approach using [TextTest](http://texttest.org).
+by Emily Bache and Geoffrey Bache to enable an approval testing approach using [TextTest](https://texttest.org).
 
 ## Installation
-1. Ensure mongo is up and running by executing ```mongod``` in your terminal
-2. Clone this repo
-3. Navigate into the restful-booker root folder
-4. Run ```npm install```
-5. Run ```npm start```
+In order to run restful booker you will need to install:
+1. npm and node
+2. mongo db
 
-## API
-API details can be found on the [api docs](https://localhost:3001/) (when you have it running locally).
+From this folder you should then be able to execute:
 
-## Emily's modifications
-The original application designed by Mark Winteringham needed two modifications to enable an approval
-testing approach.
+    npm install
+    npm start
 
-1. Ability to populate the database with known data on startup:
+Restful booker should then start running on [localhost](https://localhost:3001/) and you can access it from a browser.
 
-    By default the application generates 10 random records in the database on startup. 
-    If you set the environment variable LOAD_DB to true and set the environment variable DB_FILE to a filename then it 
-    will use the contents to load those records into the database on startup.
-    
-1. Ability to write the contents of the database to a json file:
+## Swagger documentation
+API documentation with Swagger can be found on [Swagger](https://localhost:3001/api-docs) when the application is running.
 
-    There is an additional REST endpoint called 'Dump DB' which, if you call it, will write a json file
-    to the local filesystem containing the current database contents. For full details,
-    see the [Dump DB API Docs](http://localhost:3001/apidoc/index.html#api-Admin-DumpDB).
+## Integration tests with TextTest
+In order to run the [TextTest](https://texttest.org) integration tests in the folder 'integration_tests'
+you will need to install:
 
-In addition, Emily has added a python script 'texttest_fixture.py' that enables data-driven testing. 
-This script starts the application, runs one request-response cycle, then stops it again. 
+1. Python
+2. TextTest - see  [TextTest](https://texttest.org) for instructions for your platform
+3. A lightweight editor like [Sublime Text](https://www.sublimetext.com/download)
 
-## Tests
-There is a skeleton test provided with [TextTest](http://texttest.org). Start the texttest GUI with:
+You will want to configure TextTest to use the correct editor - see [How to Configure Default Editor and Diff Tool](https://texttest.org/how_to_guides/configure_editor.html)
 
-    texttest
-  
-The idea is to add further, similar tests.  
-If you want to see a full suite/sample solution, look in the 'with_texttests' branch
+When you are developing, updating and fixing tests, you will want to do this interactively with the TextTest GUI. Start it like this:
 
+    cd integration_tests
+    .\start_texttest.bat
 
+or on posix:
+
+    cd integration_tests
+    ./start_texttest.sh
+
+This should open the TextTest GUI. If you just want to run the tests non-interactively (eg on a build server) then you can pass the argument "-con" to just run the tests on the command line.
+
+## Exploratory testing
+You can use the Swagger interface to explore the API. If you are a system administrator you will know the special Auth header that can be used for example to delete bookings:
+
+    Basic YWRtaW46cGFzc3dvcmQxMjM=
