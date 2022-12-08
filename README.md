@@ -11,10 +11,12 @@ From this folder you should then be able to execute:
     npm install
     npm start
 
-Restful booker should then start running on [localhos](https://localhost:3001/) and you can access it from a browser.
+Restful booker should then start running on [localhost](https://localhost:3001/) and you can access it from a browser.
+
+## Swagger documentation
+API documentation with Swagger can be found on [Swagger](https://localhost:3001/api-docs) when the application is running.
 
 ## Integration tests with TextTest
-
 In order to run the [TextTest](https://texttest.org) integration tests in the folder 'integration_tests'
 you will need to install:
 
@@ -24,23 +26,19 @@ you will need to install:
 
 You will want to configure TextTest to use the correct editor - see [How to Configure Default Editor and Diff Tool](https://texttest.org/how_to_guides/configure_editor.html)
 
-Before you can run the tests you will need to create a virtual python environment and install some additional python packages in it that are needed by TextTest.
+When you are developing, updating and fixing tests, you will want to do this interactively with the TextTest GUI. Start it like this:
 
-    python -m venv integration_tests/venv
+    cd integration_tests
+    .\start_texttest.bat
 
-Activate the virtual environment using the relevant script - this is the one for Windows Powershell:
+or on posix:
 
-    integration_tests/venv/Scripts/Activate.ps1
+    cd integration_tests
+    ./start_texttest.sh
 
-Install the additional python packages:
+This should open the TextTest GUI. If you just want to run the tests non-interactively (eg on a build server) then you can pass the argument "-con" to just run the tests on the command line.
 
-    pip install -r integration_tests/requirements.txt
+## Exploratory testing
+You can use the Swagger interface to explore the API. If you are a system administrator you will know the special Auth header that can be used for example to delete bookings:
 
-This is needed so TextTest will be able to run the script integration_tests/test_rig.py. Start TextTest in this folder and you should open the static test browser. Select one or more tests from the left side, and run them.
-
-
-## Swagger documentation
-Alternative API documentation with Swagger can be found on [Swagger](https://localhost:3001/api-docs). Swagger also allows you to actually make the calls directly in the interface.
-
-## API
-API details can be found on the [api docs](https://localhost:3001/) (when you have it running locally).
+    Basic YWRtaW46cGFzc3dvcmQxMjM=

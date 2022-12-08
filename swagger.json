@@ -1,15 +1,12 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "An API for practising your testing skills against",
-        "version": "1.0.0",
+        "description": "An API for practising your testing skills",
+        "version": "2.0.0",
         "title": "Restful booker",
-        "contact": {
-            "email": "abc@gmail.com"
-        },
         "license": {
-            "name": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+            "name": "License: GNU GPL",
+            "url": "https://github.com/texttest/restful-booker/blob/with_texttests/LICENSE"
         }
     },
     "schemes": ["http"],
@@ -69,12 +66,14 @@
                     {
                         "name": "firstname",
                         "in": "query",
+                        "description":  "Bookings with this firstname",
                         "schema": {
                             "type": "string"
                         }
                     },
                     {
                         "name": "lastname",
+                        "description":  "Bookings with this lastname",
                         "in": "query",
                         "schema": {
                             "type": "string"
@@ -82,6 +81,7 @@
                     },
                     {
                         "name": "checkin",
+                        "description": "Bookings that have a checkin date greater than or equal to this date. Format must be CCYY-MM-DD",
                         "in": "query",
                         "schema": {
                             "type": "string",
@@ -90,6 +90,7 @@
                     },
                     {
                         "name": "checkout",
+                        "description": "Bookings that have a checkout date greater than or equal to this date. Format must be CCYY-MM-DD",
                         "in": "query",
                         "schema": {
                             "type": "string",
@@ -176,7 +177,7 @@
                     {
                         "name": "Authorization",
                         "in": "header",
-                        "description": "The authorization header",
+                        "description": "The authorization header. There is a secret value that only application administrators know.",
                         "schema": {
                           "type": "string"
                         }
@@ -222,7 +223,7 @@
                     {
                         "name": "Authorization",
                         "in": "header",
-                        "description": "The authorization header",
+                        "description": "The authorization header. There is a secret value that only application administrators know.",
                         "schema": {
                           "type": "string"
                         }
@@ -268,7 +269,7 @@
                     {
                         "name": "Authorization",
                         "in": "header",
-                        "description": "The authorization header",
+                        "description": "The authorization header. There is a secret value that only application administrators know.",
                         "schema": {
                           "type": "string"
                         }
@@ -288,40 +289,50 @@
     "definitions": {
         "GetIdsResponse": {
             "type": "object",
+            "description": "The id of the booking",
             "properties": {
                 "bookingid": {
-                     "type": "integer"
+                     "type": "integer",
+                    "description": "unique ID of the booking"
                 }
             }
         },
         "Booking": {
             "type": "object",
+            "description": "Represents a hotel booking in the system.",
             "properties": {
                 "firstname": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "First name of the guest who made the booking"
                 },
                 "lastname": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Last name for the guest who made the booking"
                 },
                 "totalprice": {
-                    "type": "integer"
+                    "type": "integer",
+                    "description": "The total price for the booking"
                 },
                 "depositpaid": {
-                    "type": "boolean"
+                    "type": "boolean",
+                    "description": "Whether the deposit has been paid or not"
                 },
                 "bookingdates": {
                     "type": "object",
                     "properties": {
                       "checkin": {
-                        "type": "string"
+                        "type": "string",
+                          "description": "Date the guest is checking in"
                       },
                       "checkout": {
-                        "type": "string"
+                        "type": "string",
+                          "description": "Date the guest is checking out"
                       }
                     }
                 },
                 "additionalneeds": {
-                  "type": "string"
+                  "type": "string",
+                    "description": "Any other needs the guest has"
                 }
             }
         },

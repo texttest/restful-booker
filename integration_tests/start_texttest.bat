@@ -7,5 +7,5 @@ venv\Scripts\pip install -r requirements.txt
 if %ERRORLEVEL% GEQ 1 (
     pause
 ) else (
-    texttestc.exe
+    texttestc.exe %*
 )
