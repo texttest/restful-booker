@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "632ad02015eaac8fd0f0542d",
+    "bookingid": 1,
+    "firstname": "Mary",
+    "lastname": "Brown",
+    "totalprice": 953,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2018-12-31",
+      "checkout": "2019-05-09"
+    }
+  },
+  {
+    "_id": "632ad219e8cc280ec736abf2",
+    "bookingid": 2,
+    "firstname": "Susan",
+    "lastname": "Bailey",
+    "totalprice": 355,
+    "depositpaid": true,
+    "bookingdates": {
+      "checkin": "2017-05-03",
+      "checkout": "2018-09-04"
+    },
+    "additionalneeds": "Breakfast"
+  },
+  {
+    "bookingid": 3,
+    "firstname": "Sally",
+    "lastname": "Jones",
+    "totalprice": 681,
+    "depositpaid": false,
+    "bookingdates": {
+      "checkin": "2016-04-17",
+      "checkout": "2018-07-02"
+    }
+  }
+]

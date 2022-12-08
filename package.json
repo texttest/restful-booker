@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cross-env SEED=true LOAD_DB=false node ./bin/www",
-    "test": "mocha -R spec tests/spec.js",
-    "build_docs": "apidoc -i ./routes/ -o public/apidoc/"
+    "start": "cross-env SEED=true node ./bin/www",
+    "test": "mocha -R spec tests/spec.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -18,9 +17,11 @@
     "form-urlencoded": "^4.2.1",
     "honeycomb-beeline": "^2.7.1",
     "js2xmlparser": "^4.0.1",
+    "mongodb": "^4.10.0",
     "morgan": "^1.10.0",
-    "nedb": "^1.8.0",
     "pug": "^3.0.1",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0",
     "universal-analytics": "^0.4.23",
     "uuid": "^8.3.1",
     "validate.js": "^0.13.1",
@@ -29,6 +30,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
+    "nodemon": "^2.0.20",
     "supertest": "^4.0.2"
   }
 }

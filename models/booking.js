@@ -1,15 +1,19 @@
-var Datastore = require('nedb');
+// original version used the in-memory database "nedb"
+//var Datastore = require('nedb');
+//var booking = new Datastore();
 
-var counter = 0;
-
-var booking = new Datastore();
+const { MongoClient } = require("mongodb");
+const uri = process.env.BOOKER_DB_URL || "mongodb://127.0.0.1:27017";
+const client = new MongoClient(uri);
+const database = client.db('booker');
+var booking = database.collection('bookings');
 
 exports.getIDs = function(query, callback){
-  booking.find(query, function(err, booking){
+  booking.find(query).toArray(function(err, result){
     if(err){
       callback(err);
     } else {
-      callback(null, booking);
+      callback(null, result);
     }
   });
 },
@@ -25,20 +29,21 @@ exports.get = function(id, callback){
 },
 
 exports.create = function(payload, callback){
-  counter++;
-  payload.bookingid = counter;
-
-  booking.insert(payload, function(err, doc) {
-    if(err){
-      callback(err);
-    } else {
-      callback(null, payload);
-    }
+  booking.countDocuments(function(err, count) {
+    payload.bookingid = count + 1;
+  
+    booking.insertOne(payload, function(err, doc) {
+      if(err){
+        callback(err);
+      } else {
+        callback(null, payload);
+      }
+    });
   });
 },
 
 exports.update = function(id, updatedBooking, callback){
-  booking.update({'bookingid': parseInt(id)}, { $set: updatedBooking }, {}, function(err){
+  booking.updateOne({'bookingid': parseInt(id)}, { $set: updatedBooking }, {}, function(err){
     if(err){
       callback(err);
     } else {
@@ -48,7 +53,7 @@ exports.update = function(id, updatedBooking, callback){
 },
 
 exports.delete = function(id, callback){
-  booking.remove({'bookingid': parseInt(id)}, function(err){
+  booking.deleteOne({'bookingid': parseInt(id)}, function(err){
     if(err){
       callback(err);
     } else {
@@ -58,9 +63,7 @@ exports.delete = function(id, callback){
 },
 
 exports.deleteAll = function(callback){
-  counter = 0;
-
-  booking.remove({}, function(err){
+  booking.deleteMany({}, function(err){
     callback();
   });
 }

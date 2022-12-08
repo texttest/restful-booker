@@ -40,6 +40,8 @@ or on posix:
 
 This should open the TextTest GUI. If you just want to run the tests non-interactively (eg on a build server) then you can pass the argument "-con" to just run the tests on the command line.
 
+On this main branch there is only one test case, for 'ping', and it is not completed. The intention is that you use this branch as a starting point for an exercise to create tests for all the endpoints using TextTest. To view a complete set of sample tests, switch to the 'with_texttests' branch.
+
 ## Exploratory testing
 You can use the Swagger interface to explore the API. If you are a system administrator you will know the special Auth header that can be used for example to delete bookings:
 
