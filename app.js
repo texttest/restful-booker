@@ -14,7 +14,7 @@ var app = express();
 
 var capturemock = process.env.CAPTUREMOCK_SERVER;
 if (capturemock) {
-  const requestInterceptorStr = "(req) => { req.url = req.url.replace(/http:..localhost:[0-9]+/, '" + capturemock + "'); return req; }";
+  const requestInterceptorStr = "(req) => { req.url = req.url.replace(/http:..(127.0.0.1|localhost):[0-9]+/, '" + capturemock + "'); return req; }";
   var options = {
     swaggerOptions: {
       requestInterceptor: eval(requestInterceptorStr)
