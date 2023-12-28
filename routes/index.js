@@ -57,7 +57,7 @@ router.get('/booking', function(req, res, next) {
   Booking.getIDs(query, function(err, record){
     if (err) {
       console.error(err);
-      res.sendStatus(500);
+      res.sendStatus(404);
     } else {
       var booking = parse.bookingids(req, record);
 
@@ -97,7 +97,7 @@ router.post('/booking', function(req, res, next) {
     if(!msg){
       Booking.create(newBooking, function(err, booking){
         if(err)
-          res.sendStatus(500);
+          res.sendStatus(400);
         else {
           var record = parse.bookingWithId(req, booking);
 
@@ -109,7 +109,7 @@ router.post('/booking', function(req, res, next) {
         }
       })
     } else {
-      res.sendStatus(500);
+      res.sendStatus(400);
     }
   })
 });
@@ -120,7 +120,7 @@ router.put('/booking/:id', function(req, res, next) {
     updatedBooking = req.body;
     if(req.headers['content-type'] === 'text/xml') updatedBooking = updatedBooking.booking;
 
-    validator.scrubAndValidate(updatedBooking, function(payload, msg){
+    validator.scrubAndValidate(updatedBooking.task, function(payload, msg){
       if(!msg){
         Booking.update(req.params.id, updatedBooking, function(err){
           Booking.get(req.params.id, function(err, record){
@@ -160,7 +160,7 @@ router.patch('/booking/:id', function(req, res) {
           var booking = parse.booking(req.headers.accept, record);
 
           if(!booking){
-            res.sendStatus(500);
+            res.sendStatus(400);
           } else {
             res.send(booking);
           }
@@ -183,7 +183,7 @@ router.delete('/booking/:id', function(req, res, next) {
             res.sendStatus(201);
         });
       } else {
-        res.sendStatus(405);
+        res.sendStatus(404);
       }
     });
   } else {

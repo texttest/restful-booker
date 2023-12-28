@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var xmlparser = require('express-xml-bodyparser');
 
+const OpenApiValidator = require('express-openapi-validator');
+
 var routes = require('./routes/index');
 
 const swaggerUi = require('swagger-ui-express');
@@ -28,6 +30,13 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(xmlparser({trim: false, explicitArray: false}));
+
+app.use( OpenApiValidator.middleware({
+    apiSpec: "./oas.yaml",
+    validateRequests: true,
+    validateResponses: true
+}));
+
 
 app.use('/', routes);
 
