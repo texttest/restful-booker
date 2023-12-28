@@ -107,6 +107,7 @@ paths:
             date. Format must be CCYY-MM-DD
           schema:
             type: string
+            pattern: '^\d{4}-\d{2}-\d{2}$'
           examples:
             GET_BOOKING_IDS:
               value: 2019-01-01
