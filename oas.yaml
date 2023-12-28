@@ -128,7 +128,7 @@ paths:
                     - bookingid: 2
                     - bookingid: 3
         '400':
-          description: unsuccessful operation
+          description: invalid request
           content:
             text/plain:
               schema:
@@ -178,7 +178,7 @@ paths:
                         checkout: 2019-01-01
                       additionalneeds: Breakfast
         '400':
-          description: unsuccessful operation
+          description: invalid request
           content:
             text/plain:
               schema:
@@ -294,7 +294,7 @@ paths:
                       checkout: 2019-01-01
                     additionalneeds: Breakfast
         '400':
-          description: unsuccessful operation
+          description: invalid request
           content:
             text/plain:
               schema:
@@ -412,7 +412,7 @@ paths:
                       checkout: 2019-01-01
                     additionalneeds: Breakfast
         '400':
-          description: unsuccessful operation
+          description: invalid request
           content:
             text/plain:
               schema:
