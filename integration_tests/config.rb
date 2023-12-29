@@ -14,6 +14,8 @@ dbtext_database_path:mongodata
 
 import_config_file:capturemock_config
 
+copy_test_path:${TEXTTEST_ROOT}/../oas.yaml
+
 [run_dependent_text]
 stdout:(url http://)(127.0.0.1|localhost):\d+{REPLACE \1<localhost_port>}
 httpmocks:"token":"[\d\w]+"{REPLACE "token": "atoken"}
