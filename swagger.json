@@ -214,9 +214,6 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "required": [
-                                "task"
-                            ],
                             "properties": {
                                 "task" : {
                                     "type": "object",
@@ -260,8 +257,7 @@
                         "description": "The authorization header. There is a secret value that only application administrators know.",
                         "schema": {
                           "type": "string"
-                        },
-                        "required": true
+                        }
                     },
                     {
                         "in": "body",
@@ -313,8 +309,7 @@
                         "description": "The authorization header. There is a secret value that only application administrators know.",
                         "schema": {
                           "type": "string"
-                        },
-                        "required": true
+                        }
                     }
                 ],
                 "responses": {

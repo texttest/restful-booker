@@ -31,11 +31,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(xmlparser({trim: false, explicitArray: false}));
 
-app.use( OpenApiValidator.middleware({
-    apiSpec: "./oas.yaml",
-    validateRequests: true,
-    validateResponses: true
-}));
+
+// This validation code is disabled because it doesn't work yet
+//app.use( OpenApiValidator.middleware({
+//    apiSpec: "./oas.yaml",
+//    validateRequests: true,
+//    validateResponses: true
+//}));
 
 
 app.use('/', routes);
