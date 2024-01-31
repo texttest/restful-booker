@@ -32,12 +32,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(xmlparser({trim: false, explicitArray: false}));
 
 
-// This validation code is disabled because it doesn't work yet
-//app.use( OpenApiValidator.middleware({
-//    apiSpec: "./oas.yaml",
-//    validateRequests: true,
-//    validateResponses: true
-//}));
+// This validation code is only checking responses, not requests.
+app.use( OpenApiValidator.middleware({
+   apiSpec: "./oas.yaml",
+   validateRequests: false,
+   validateResponses: true
+}));
 
 
 app.use('/', routes);
