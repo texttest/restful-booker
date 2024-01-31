@@ -9,3 +9,6 @@ package-lock.json
 .pydevproject
 *.iml
 *.pyc
+build/
+specmatic.bat
+
