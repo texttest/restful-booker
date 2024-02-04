@@ -125,9 +125,9 @@ paths:
               examples:
                 GET_BOOKING_IDS:
                   value:
-                    - bookingid: 1
-                    - bookingid: 2
                     - bookingid: 3
+                    - bookingid: 4
+                    - bookingid: 5
         '400':
           description: invalid request
           content:
@@ -198,7 +198,7 @@ paths:
             type: string
           examples:
             GET_BOOKING:
-              value: 1
+              value: 3
             GET_INVALID_BOOKING_ID:
               value: abc
       responses:
@@ -240,7 +240,7 @@ paths:
             type: string
           examples:
             UPDATE_BOOKING:
-              value: 1
+              value: 3
         - name: Authorization
           in: header
           description: >-
@@ -313,7 +313,7 @@ paths:
             type: string
           examples:
             DELETE_BOOKING:
-              value: 1
+              value: 6
             DELETE_INVALID_BOOKING_ID:
               value: abc
         - name: Authorization
@@ -360,7 +360,7 @@ paths:
             type: string
           examples:
             UPDATE_BOOKING:
-              value: 1
+              value: 7
         - name: Authorization
           in: header
           description: >-
