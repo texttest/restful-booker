@@ -36,7 +36,7 @@ app.use(xmlparser({trim: false, explicitArray: false}));
 app.use( OpenApiValidator.middleware({
    apiSpec: "./oas.yaml",
    validateRequests: false,
-   validateResponses: true
+   validateResponses: false
 }));
 
 
