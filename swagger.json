@@ -167,7 +167,7 @@
                         "in": "path",
                         "description": "booking id to find",
                         "required": true,
-                        "type": "string"
+                        "type": "integer"
                     }
                 ],
                 "responses": {
@@ -196,7 +196,7 @@
                         "in": "path",
                         "description": "booking id to update",
                         "required": true,
-                        "type": "string"
+                        "type": "integer"
                     },
                     {
                         "name": "Authorization",
@@ -214,12 +214,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "properties": {
-                                "task" : {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Booking"
-                                } 
-                            }
+                            "$ref": "#/definitions/Booking"
                         }
                     }
                 ],
@@ -249,7 +244,7 @@
                         "in": "path",
                         "description": "booking id to update",
                         "required": true,
-                        "type": "string"
+                        "type": "integer"
                     },
                     {
                         "name": "Authorization",
@@ -266,12 +261,7 @@
                         "required": true,
                         "schema": {
                             "type": "object",
-                            "properties": {
-                                "task" : {
-                                    "type": "object",
-                                    "$ref": "#/definitions/Booking"
-                                } 
-                            }
+                            "$ref": "#/definitions/Booking"
                         }
                     }
                 ],
@@ -383,7 +373,7 @@
             "type": "object",
             "properties": {
                 "bookingid": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "booking": {
                     "type": "object",

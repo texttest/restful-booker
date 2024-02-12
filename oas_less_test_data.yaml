@@ -22,9 +22,6 @@ paths:
             application/json:
               schema:
                 type: string
-              examples:
-                PING_SUCCESS:
-                  value: success
   /auth:
     post:
       summary: Get an authorization token
@@ -35,11 +32,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/AuthParams'
-            examples:
-              AUTH:
-                value:
-                  username: admin2
-                  password: password123
         required: true
       responses:
         '200':
@@ -48,11 +40,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/AuthResponse'
-              examples:
-                AUTH:
-                  value:
-                    token: abc123
-                    reason: Login successful
         '400':
           description: unsuccessful operation
           content:
@@ -72,21 +59,11 @@ paths:
           description: Bookings with this firstname
           schema:
             type: string
-          examples:
-            GET_BOOKING_IDS:
-              value: Jim
-            GET_INVALID_CHECKIN_DATE:
-              value: (omit)
         - name: lastname
           in: query
           description: Bookings with this lastname
           schema:
             type: string
-          examples:
-            GET_BOOKING_IDS:
-              value: Brown
-            GET_INVALID_CHECKIN_DATE:
-              value: (omit)
         - name: checkin
           in: query
           description: >-
@@ -96,11 +73,6 @@ paths:
             type: string
             format: date
             pattern: '^\d{4}-\d{2}-\d{2}$'
-          examples:
-            GET_BOOKING_IDS:
-              value: 2018-01-01
-            GET_INVALID_CHECKIN_DATE:
-              value: 123
         - name: checkout
           in: query
           description: >-
@@ -110,11 +82,6 @@ paths:
             type: string
             format: date
             pattern: '^\d{4}-\d{2}-\d{2}$'
-          examples:
-            GET_BOOKING_IDS:
-              value: 2019-01-01
-            GET_INVALID_CHECKIN_DATE:
-              value: (omit)
       responses:
         '200':
           description: successful operation
@@ -124,21 +91,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GetIdsResponse'
-              examples:
-                GET_BOOKING_IDS:
-                  value:
-                    - bookingid: 3
-                    - bookingid: 4
-                    - bookingid: 5
         '400':
           description: invalid request
           content:
             text/plain:
               schema:
                 type: string
-              examples:
-                GET_INVALID_CHECKIN_DATE:
-                  value: Invalid checkin date supplied
     post:
       summary: Create booking
       description: Creates a new booking in the API
@@ -148,17 +106,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/Booking'
-            examples:
-              CREATE_BOOKING:
-                value:
-                  firstname: Jim
-                  lastname: Brown
-                  totalprice: 111
-                  depositpaid: true
-                  bookingdates:
-                    checkin: 2018-01-01
-                    checkout: 2019-01-01
-                  additionalneeds: Breakfast
         required: true
       responses:
         '200':
@@ -167,19 +114,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BookingResponse'
-              examples:
-                CREATE_BOOKING:
-                  value:
-                    bookingid: 1
-                    booking:
-                      firstname: Jim
-                      lastname: Brown
-                      totalprice: 111
-                      depositpaid: true
-                      bookingdates:
-                        checkin: 2018-01-01
-                        checkout: 2019-01-01
-                      additionalneeds: Breakfast
         '400':
           description: invalid request
           content:
@@ -198,11 +132,6 @@ paths:
           required: true
           schema:
             type: integer
-          examples:
-            GET_BOOKING:
-              value: 3
-            GET_INVALID_BOOKING_ID:
-              value: -1
       responses:
         '200':
           description: successful operation
@@ -210,26 +139,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Booking'
-              examples:
-                GET_BOOKING:
-                  value:
-                    firstname: Jim
-                    lastname: Brown
-                    totalprice: 111
-                    depositpaid: true
-                    bookingdates:
-                      checkin: 2018-01-01
-                      checkout: 2019-01-01
-                    additionalneeds: Breakfast
         '404':
           description: not found
           content:
             text/plain:
               schema:
                 type: string
-              examples:
-                GET_INVALID_BOOKING_ID:
-                  value: Invalid ID supplied
     put:
       summary: Update a booking
       description: Update a booking
@@ -240,9 +155,6 @@ paths:
           required: true
           schema:
             type: integer
-          examples:
-            UPDATE_BOOKING:
-              value: 8
         - name: Authorization
           in: header
           description: >-
@@ -251,26 +163,12 @@ paths:
           schema:
             type: string
           required: true
-          examples:
-            UPDATE_BOOKING:
-              value: Basic YWRtaW46cGFzc3dvcmQxMjM=
       requestBody:
         description: booking object
         content:
           '*/*':
             schema:
               $ref: '#/components/schemas/Booking'
-            examples:
-              UPDATE_BOOKING:
-                value:
-                  firstname: Mary
-                  lastname: Jones
-                  totalprice: 111
-                  depositpaid: true
-                  bookingdates:
-                    checkin: 2018-01-01
-                    checkout: 2019-01-01
-                  additionalneeds: Breakfast
         required: true
       responses:
         '200':
@@ -279,17 +177,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Booking'
-              examples:
-                UPDATE_BOOKING:
-                  value:
-                    firstname: Mary
-                    lastname: Jones
-                    totalprice: 111
-                    depositpaid: true
-                    bookingdates:
-                      checkin: 2018-01-01
-                      checkout: 2019-01-01
-                    additionalneeds: Breakfast
         '400':
           description: invalid request
           content:
@@ -307,11 +194,6 @@ paths:
           required: true
           schema:
             type: integer
-          examples:
-            DELETE_BOOKING:
-              value: 6
-            DELETE_INVALID_BOOKING_ID:
-              value: -1
         - name: Authorization
           in: header
           description: >-
@@ -320,11 +202,6 @@ paths:
           schema:
             type: string
           required: true
-          examples:
-            DELETE_BOOKING:
-              value: Basic YWRtaW46cGFzc3dvcmQxMjM=
-            DELETE_INVALID_BOOKING_ID:
-              value: Basic YWRtaW46cGFzc3dvcmQxMjM=
       responses:
         '201':
           description: successful operation
@@ -332,18 +209,12 @@ paths:
             application/json:
               schema:
                 type: string
-              examples:
-                DELETE_BOOKING:
-                  value: Deleted
         '404':
           description: booking not found
           content:
             text/plain:
               schema:
                 type: string
-              examples:
-                DELETE_INVALID_BOOKING_ID:
-                  value: Invalid ID supplied
     patch:
       summary: Partially update a booking
       description: Partially update a booking
@@ -354,9 +225,6 @@ paths:
           required: true
           schema:
             type: integer
-          examples:
-            UPDATE_BOOKING:
-              value: 7
         - name: Authorization
           in: header
           description: >-
@@ -365,26 +233,12 @@ paths:
           schema:
             type: string
           required: true
-          examples:
-            UPDATE_BOOKING:
-              value: Basic YWRtaW46cGFzc3dvcmQxMjM=
       requestBody:
         description: booking object
         content:
           '*/*':
             schema:
               $ref: '#/components/schemas/Booking'
-            examples:
-              UPDATE_BOOKING:
-                value:
-                  firstname: Jim
-                  lastname: Brown
-                  totalprice: 111
-                  depositpaid: true
-                  bookingdates:
-                    checkin: 2018-01-01
-                    checkout: 2019-01-01
-                  additionalneeds: Breakfast
         required: true
       responses:
         '200':
@@ -393,17 +247,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Booking'
-              examples:
-                UPDATE_BOOKING:
-                  value:
-                    firstname: Jim
-                    lastname: Brown
-                    totalprice: 111
-                    depositpaid: true
-                    bookingdates:
-                      checkin: 2018-01-01
-                      checkout: 2019-01-01
-                    additionalneeds: Breakfast
         '400':
           description: invalid request
           content:
