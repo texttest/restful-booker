@@ -11,6 +11,9 @@ var router  = express.Router(),
 const { v4: uuidv4 } = require('uuid');
 
 if(process.env.SEED === 'true'){
+  Booking.deleteAll(function(){
+      console.log("deleted all bookings")
+    });
   var count = 1;
 
   (function createBooking(){
@@ -22,7 +25,8 @@ if(process.env.SEED === 'true'){
       if(count < 10){
         count++;
         createBooking();
-      }
+      } else
+        console.log("seeded database with generated bookings");
     });
   })()
 };
