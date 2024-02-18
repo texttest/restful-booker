@@ -22,26 +22,25 @@ function createBookingAsync(bookingData) {
 const initializeSeedData = async function() {
     return new Promise(async (resolve, reject) => {
         try {
-            try {
-                await deleteAllBookings();
-                console.log("All bookings deleted successfully.");
-            } catch (error) {
-                console.error("Failed to delete bookings:", error);
-            }
+            await deleteAllBookings();
+            console.log("All bookings deleted successfully.");
+        } catch (error) {
+            console.error("Failed to delete bookings:", error);
+            reject(err);
+        }
 
+        try {
             const totalBookings = 10;
-
             for (let count = 0; count < totalBookings; count++) {
                 var newBooking = creator.createBooking();
                 await createBookingAsync(newBooking);
                 console.log(`Created booking ${count + 1}`);
             }
-
             console.log("Seeded database with generated bookings");
-            resolve(); // Explicitly resolve the Promise
+            resolve();
         } catch (err) {
             console.error("Error seeding database:", err);
-            reject(err); // Explicitly reject the Promise
+            reject(err);
         }
     });
 };
