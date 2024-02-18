@@ -29,4 +29,4 @@ function getApp() {
     return app
 }
 
-module.exports = { getApp, insertSeedData, startAppServer, stopAppServer }
+module.exports = { getApp, startAppServer, stopAppServer }
