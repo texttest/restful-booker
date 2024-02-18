@@ -8,7 +8,7 @@ const APP_PORT = 3031;
 let appServer;
 let mongoContainer;
 
-jest.setTimeout(600000);
+jest.setTimeout(30000);
 
 specmatic.showTestResults(test);
 
