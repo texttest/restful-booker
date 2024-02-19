@@ -14,3 +14,4 @@ specmatic.bat
 dist/
 
 build/reports/specmatic/
+coverage/*
