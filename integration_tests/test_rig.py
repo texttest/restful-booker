@@ -32,7 +32,8 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
 
     testdbname = "ttdb_" + str(os.getpid()) # some temporary name not to clash with other tests
-    with dbtext.LocalMongo_DBText(testdbname, transactions=False) as db:
+    with dbtext.LocalMongo_DBText(data_dirname="mongodata", db_dirname=testdbname) as db:
+        db.create()
         if not db.setup_succeeded(): # could not start MongoDB, for example
             sys.exit(1)
 
