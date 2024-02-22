@@ -1,0 +1,4 @@
+{
+    "testMatch": ["**/contract.test.mjs"],
+    "coveragePathIgnorePatterns": ["/node_modules/", "/test/"]
+}
