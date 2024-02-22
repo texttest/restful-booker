@@ -61,3 +61,13 @@ In app.js you can find some validation code using OpenApiValidator that will che
 You can use the Swagger interface to explore the API. If you are a system administrator you will know the special Auth header that can be used for example to delete bookings:
 
     Basic YWRtaW46cGFzc3dvcmQxMjM=
+
+## Running Specmatic Contract Tests
+
+### Pre-requisites
+
+Please ensure you have the latest Docker Desktop Install, the contract test using [testcontainers](testcontainers.org) to spin up a MongoDB for the test
+
+### Running tests
+
+    npm run contract-test

@@ -6,29 +6,13 @@ var router  = express.Router(),
     validator = require('../helpers/validator'),
     creator = require('../helpers/bookingcreator'),
     ua      = require('universal-analytics');
+    initializeSeedData = require('./seed.js');
     globalLogins = {};
 
 const { v4: uuidv4 } = require('uuid');
 
 if(process.env.SEED === 'true'){
-  Booking.deleteAll(function(){
-      console.log("deleted all bookings")
-    });
-  var count = 1;
-
-  (function createBooking(){
-    var newBooking = creator.createBooking()
-
-    Booking.create(newBooking, function(err, result){
-      if(err) return console.error(err);
-
-      if(count < 10){
-        count++;
-        createBooking();
-      } else
-        console.log("seeded database with generated bookings");
-    });
-  })()
+  initializeSeedData();
 };
 
 ua('UA-118712228-2', uuidv4());

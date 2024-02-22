@@ -11,4 +11,7 @@ package-lock.json
 *.pyc
 build/
 specmatic.bat
+dist/
 
+build/reports/specmatic/
+coverage/*
