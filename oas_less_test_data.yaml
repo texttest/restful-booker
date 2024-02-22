@@ -166,7 +166,7 @@ paths:
       requestBody:
         description: booking object
         content:
-          '*/*':
+          application/json:
             schema:
               $ref: '#/components/schemas/Booking'
         required: true
@@ -236,7 +236,7 @@ paths:
       requestBody:
         description: booking object
         content:
-          '*/*':
+          application/json:
             schema:
               $ref: '#/components/schemas/Booking'
         required: true

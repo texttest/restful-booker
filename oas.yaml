@@ -257,7 +257,7 @@ paths:
       requestBody:
         description: booking object
         content:
-          '*/*':
+          application/json:
             schema:
               $ref: '#/components/schemas/Booking'
             examples:
@@ -371,7 +371,7 @@ paths:
       requestBody:
         description: booking object
         content:
-          '*/*':
+          application/json:
             schema:
               $ref: '#/components/schemas/Booking'
             examples:
