@@ -154,6 +154,8 @@ paths:
           examples:
             CREATE_BOOKING:
               value: Basic YWRtaW46cGFzc3dvcmQxMjM=
+            CREATE_BOOKING_INVALID_CREDENTIALS:
+                value: (omit)
       requestBody:
         description: booking object
         content:
@@ -162,6 +164,16 @@ paths:
               $ref: '#/components/schemas/Booking'
             examples:
               CREATE_BOOKING:
+                value:
+                  firstname: Jim
+                  lastname: Brown
+                  totalprice: 111
+                  depositpaid: true
+                  bookingdates:
+                    checkin: 2018-01-01
+                    checkout: 2019-01-01
+                  additionalneeds: Breakfast
+              CREATE_BOOKING_INVALID_CREDENTIALS:
                 value:
                   firstname: Jim
                   lastname: Brown
@@ -198,6 +210,15 @@ paths:
             text/plain:
               schema:
                 type: string
+        '403':
+          description: forbidden
+          content:
+            text/plain:
+              schema:
+                type: string
+              examples:
+                CREATE_BOOKING_INVALID_CREDENTIALS:
+                  value: forbidden
       x-codegen-request-body-name: body
   /booking/{id}:
     get:
